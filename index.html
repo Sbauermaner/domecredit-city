@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DomeCredit City - AI-Powered Smart City</title>
+    <title>DomeCredit City - The Future of Smart Living</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,35 +27,6 @@
             padding: 40px;
             animation: slideIn 1.5s ease-in-out;
         }
-        .highlight {
-            font-size: 20px;
-            font-weight: bold;
-            color: #00FFD1;
-        }
-        .cta-button {
-            background-color: #00FFD1;
-            color: #0A0F24;
-            padding: 15px 30px;
-            font-size: 18px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: scale(1.1);
-        }
-        footer {
-            background: #1E2A47;
-            padding: 20px;
-            font-size: 14px;
-        }
-        canvas {
-            display: block;
-            margin: auto;
-            background: black;
-        }
         img {
             width: 80%;
             max-width: 1200px;
@@ -60,30 +34,7 @@
             display: block;
             border-radius: 10px;
         }
-        .chatbot-container, .ai-guide-container {
-            width: 300px;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #1E2A47;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
-        }
-        .chatbot-messages, .ai-guide-messages {
-            height: 200px;
-            overflow-y: auto;
-            border-bottom: 1px solid #444;
-            padding-bottom: 10px;
-        }
-        .chatbot-input, .ai-guide-input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 5px;
-        }
-        .comments-section {
+        .comments-section, .chatbot-container, .ai-guide-container {
             margin-top: 40px;
             text-align: left;
             width: 60%;
@@ -93,12 +44,7 @@
             padding: 20px;
             border-radius: 10px;
         }
-        .comments-list {
-            max-height: 200px;
-            overflow-y: auto;
-            margin-top: 10px;
-        }
-        .comment-input {
+        .comment-input, .chatbot-input, .ai-guide-input {
             width: calc(100% - 20px);
             padding: 10px;
             border: none;
@@ -118,47 +64,105 @@
 <body>
 
 <header>
-    🌍 DomeCredit City - The First AI-Powered Smart City 🚀
+    🌍 DomeCredit City - The Future of Smart Living 🚀
 </header>
 
 <section>
-    <h1>3D Interactive Model of DomeCredit City</h1>
+    <h1>🌆 About DomeCredit City</h1>
+    <p>DomeCredit City is an AI-powered, blockchain-based sustainable city with eco-friendly architecture and smart infrastructure.
+       It is designed to optimize energy efficiency, economic stability, and community well-being.</p>
+    <img src="A_detailed_futuristic_eco-city_master_plan,_showin.png" alt="City Master Plan">
+</section>
+
+<section>
+    <h2>🏗️ Architecture & District Development</h2>
+    <p>The city is divided into multiple districts, each with a unique focus:</p>
+    <ul>
+        <li><b>Residential Districts</b> – eco-friendly housing with smart home integration.</li>
+        <li><b>Business Hubs</b> – AI-powered commercial centers and office spaces.</li>
+        <li><b>Innovation & Tech Zones</b> – research centers for AI, biotech, and sustainability.</li>
+        <li><b>Green Spaces</b> – urban forests, parks, and solar-powered energy zones.</li>
+    </ul>
+    <img src="A_highly_detailed_futuristic_eco-city_layout,_feat.png" alt="Architectural Designs and Road Networks">
+</section>
+
+<section>
+    <h2>💰 Financial System & Payment Model</h2>
+    <p>The city operates with a blockchain-based cryptocurrency, **DomeCredit (DMC)**, ensuring transparency and eliminating corruption.</p>
+    <ul>
+        <li><b>Sector-Based Pricing</b> – Fixed pricing on essential goods to prevent inflation.</li>
+        <li><b>Automatic Upgrades</b> – Residents earning DMC get automatic housing upgrades.</li>
+        <li><b>Investment Pools</b> – Collected funds are directed toward infrastructure expansion.</li>
+    </ul>
+    <img src="A_futuristic_eco-friendly_smart_city_with_multiple.png" alt="Financial Structure">
+</section>
+
+<section>
+    <h2>🌱 Incentives & Social Benefits</h2>
+    <p>Residents receive benefits based on contribution to the city's ecosystem.</p>
+    <ul>
+        <li><b>Workforce Protection</b> – Special packages for injured workers and disabled individuals.</li>
+        <li><b>Housing Development</b> – Discounts for young families and large households.</li>
+        <li><b>Eco-Engagement Rewards</b> – Bonuses for sustainable practices and energy conservation.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>🌍 Investment & Expansion Strategy</h2>
+    <p>The city is funded through multiple investment channels:</p>
+    <ul>
+        <li>**Global Investors & Smart Funds** – Encouraging private and corporate investments.</li>
+        <li>**Sectoral Development Plans** – Funding allocated based on district expansion.</li>
+        <li>**Real Estate Tokenization** – Digital assets representing property ownership.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>🚀 3D Interactive Model of DomeCredit City</h2>
     <canvas id="cityCanvas"></canvas>
 </section>
 
 <section class="comments-section">
     <h2>💬 User Comments</h2>
-    <input type="text" id="commentInput" class="comment-input" placeholder="Write a comment...">
-    <button onclick="addComment()" class="comment-button">Post</button>
-    <div id="commentsList" class="comments-list"></div>
+    <input type="text" id="commentInput" placeholder="Write a comment...">
+    <button onclick="addComment()">Post</button>
+    <div id="commentsList"></div>
 </section>
 
 <div class="chatbot-container">
     <h3>🤖 AI Chatbot</h3>
     <div class="chatbot-messages" id="chatMessages"></div>
-    <input type="text" id="chatInput" class="chatbot-input" placeholder="Ask something..." onkeypress="sendMessage(event)">
-</div>
-
-<div class="ai-guide-container">
-    <h3>🧭 AI Guide</h3>
-    <div class="ai-guide-messages" id="aiMessages"></div>
-    <input type="text" id="aiInput" class="ai-guide-input" placeholder="Need help? Ask AI Guide!" onkeypress="guideMessage(event)">
+    <input type="text" id="chatInput" placeholder="Ask something..." onkeypress="sendMessage(event)">
 </div>
 
 <footer>
     Contact: info@domecredit.ai | Follow us on @DomeCredit
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-    // WebGL 3D модель
+    function addComment() {
+        const commentInput = document.getElementById("commentInput");
+        const commentText = commentInput.value.trim();
+        if (commentText !== "") {
+            document.getElementById("commentsList").innerHTML += `<p>${commentText}</p>`;
+            commentInput.value = "";
+        }
+    }
+
+    function sendMessage(event) {
+        if (event.key === "Enter") {
+            document.getElementById("chatMessages").innerHTML += `<p>🧑‍💻 You: ${event.target.value}</p>`;
+            event.target.value = "";
+        }
+    }
+
+    // WebGL 3D Model
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('cityCanvas'), alpha: true });
     renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.5);
     document.body.appendChild(renderer.domElement);
 
-    // Купол города + здания + дороги + транспорт
     const domeGeometry = new THREE.SphereGeometry(5, 32, 32);
     const domeMaterial = new THREE.MeshBasicMaterial({ color: 0x00FFD1, wireframe: true });
     const dome = new THREE.Mesh(domeGeometry, domeMaterial);
@@ -172,48 +176,6 @@
         renderer.render(scene, camera);
     }
     animate();
-
-    // Сохранение комментариев в localStorage
-    function addComment() {
-        const commentInput = document.getElementById("commentInput");
-        const commentText = commentInput.value.trim();
-        if (commentText !== "") {
-            const commentList = document.getElementById("commentsList");
-            const newComment = document.createElement("p");
-            newComment.textContent = commentText;
-            commentList.appendChild(newComment);
-            commentInput.value = "";
-
-            let comments = JSON.parse(localStorage.getItem("comments")) || [];
-            comments.push(commentText);
-            localStorage.setItem("comments", JSON.stringify(comments));
-        }
-    }
-
-    window.onload = function () {
-        let comments = JSON.parse(localStorage.getItem("comments")) || [];
-        const commentList = document.getElementById("commentsList");
-        comments.forEach(comment => {
-            const newComment = document.createElement("p");
-            newComment.textContent = comment;
-            commentList.appendChild(newComment);
-        });
-    };
-
-    // AI-бот
-    function sendMessage(event) {
-        if (event.key === "Enter") {
-            document.getElementById("chatMessages").innerHTML += `<p>🧑‍💻 You: ${event.target.value}</p>`;
-            event.target.value = "";
-        }
-    }
-
-    function guideMessage(event) {
-        if (event.key === "Enter") {
-            document.getElementById("aiMessages").innerHTML += `<p>🧭 Guide: ${event.target.value}</p>`;
-            event.target.value = "";
-        }
-    }
 </script>
 
 </body>
