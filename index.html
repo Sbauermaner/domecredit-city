@@ -3,51 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DomeCredit City - A self-sustaining AI-powered smart city based on blockchain technology.">
+    <meta name="keywords" content="Smart City, Blockchain, AI, Sustainability">
+    <meta name="author" content="DomeCredit Team">
     <title>DomeCredit City - The Future of Smart Living</title>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #0A0F24;
-            color: white;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            transition: all 0.3s ease-in-out;
-        }
-        header {
-            background: linear-gradient(90deg, #1E2A47, #3B4A6B);
-            padding: 20px;
-            font-size: 28px;
-            font-weight: bold;
-            text-transform: uppercase;
-            animation: fadeIn 2s ease-in-out;
-        }
-        section {
-            padding: 40px;
-            max-width: 1200px;
-            margin: auto;
-            text-align: center;
-            animation: slideIn 1.5s ease-in-out;
-        }
-        .language-selector {
-            margin: 20px;
-        }
-        .comment-section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 </head>
 <body>
 
 <header>
-    🌍 DomeCredit City - The Future of Smart Living 🚀
-    <div class="language-selector">
+    <h1>🌍 DomeCredit City - The Future of Smart Living 🚀</h1>
+    <nav>
         <label for="language">🌐 Select Language:</label>
         <select id="language" onchange="changeLanguage()">
             <option value="en">English</option>
@@ -55,85 +24,37 @@
             <option value="zh">中文</option>
             <option value="de">Deutsch</option>
         </select>
-    </div>
+    </nav>
 </header>
 
-<section id="content">
-    <h1 id="title">Welcome to the Future</h1>
-    <p id="description">DomeCredit City is a revolutionary self-sustaining metropolis powered by AI and blockchain technology. Designed for sustainability, it integrates green energy, smart governance, and a transparent economic system using DomeCredit (DMC). The city's infrastructure is optimized for efficiency, security, and quality of life.</p>
-</section>
+<main>
+    <section id="content">
+        <h2 id="title">Welcome to the Future</h2>
+        <p id="description">DomeCredit City is a revolutionary self-sustaining metropolis powered by AI and blockchain technology.</p>
+    </section>
 
-<section>
-    <h2>🏗️ City Districts & Infrastructure</h2>
-    <p>DomeCredit City is structured into multiple districts, each designed with a specific purpose:</p>
-    <ul>
-        <li><b>Residential Districts</b> – Smart eco-friendly housing.</li>
-        <li><b>Business Hubs</b> – AI-powered commercial spaces.</li>
-        <li><b>Tech Innovation Zones</b> – AI research and sustainable technologies.</li>
-        <li><b>Green Energy Sectors</b> – Solar, wind, and water power plants.</li>
-        <li><b>Transport & Logistics</b> – AI-driven traffic control and smart roads.</li>
-    </ul>
-</section>
+    <section>
+        <h2 id="districts-title">🏗️ City Districts & Infrastructure</h2>
+        <p id="districts-desc">DomeCredit City is structured into multiple districts, each designed with a specific purpose:</p>
+        <ul id="districts-list">
+            <li><b>Residential Districts</b> – Smart eco-friendly housing.</li>
+            <li><b>Business Hubs</b> – AI-powered commercial spaces.</li>
+            <li><b>Tech Innovation Zones</b> – AI research and sustainable technologies.</li>
+            <li><b>Green Energy Sectors</b> – Solar, wind, and water power plants.</li>
+            <li><b>Transport & Logistics</b> – AI-driven traffic control and smart roads.</li>
+        </ul>
+    </section>
 
-<section>
-    <h2>💰 Financial System & DomeCredit (DMC)</h2>
-    <p>The city operates with a blockchain-based cryptocurrency, DomeCredit (DMC), ensuring a stable and fair economy.</p>
-    <ul>
-        <li><b>Smart Wallets</b> – Linked to biometric authentication.</li>
-        <li><b>Transparent Transactions</b> – Blockchain ensures no corruption.</li>
-        <li><b>Investment Pools</b> – Funds allocated to city development.</li>
-        <li><b>Sector-Based Pricing</b> – Stabilized economy with fixed essential costs.</li>
-    </ul>
-</section>
-
-<section>
-    <h2>🌱 Environmental Sustainability & Radiation Protection</h2>
-    <p>DomeCredit City integrates advanced technologies for ecological balance.</p>
-    <ul>
-        <li><b>Solar & Wind Energy</b> – Self-sustaining power sources.</li>
-        <li><b>Water Purification</b> – Smart filtration systems.</li>
-        <li><b>Radiation Shielding</b> – Dome structure with protective materials.</li>
-    </ul>
-</section>
-
-<section>
-    <h2>🚀 3D Interactive Model of DomeCredit City</h2>
-    <canvas id="cityCanvas"></canvas>
-</section>
-
-<section class="comment-section">
-    <h2>💬 User Comments</h2>
-    <input type="text" id="commentInput" placeholder="Write a comment...">
-    <button onclick="addComment()">Post</button>
-    <div id="commentsList"></div>
-</section>
+    <section>
+        <h2>🚀 3D Interactive Model of DomeCredit City</h2>
+        <canvas id="cityCanvas" aria-label="3D model of DomeCredit City"></canvas>
+    </section>
+</main>
 
 <footer>
-    Contact: info@domecredit.ai | Follow us on @DomeCredit
+    <p>Contact: <a href="mailto:info@domecredit.ai">info@domecredit.ai</a> | Follow us on @DomeCredit</p>
 </footer>
 
-<script>
-    function changeLanguage() {
-        const lang = document.getElementById("language").value;
-        const translations = {
-            en: { title: "Welcome to the Future", description: "DomeCredit City is a revolutionary self-sustaining metropolis powered by AI and blockchain technology." },
-            ru: { title: "Добро пожаловать в будущее", description: "DomeCredit City - революционный самодостаточный мегаполис на основе ИИ и блокчейна." },
-            zh: { title: "欢迎来到未来", description: "DomeCredit City 是一个由人工智能和区块链技术驱动的革命性自给自足大都市。" },
-            de: { title: "Willkommen in der Zukunft", description: "DomeCredit City ist eine revolutionäre, selbsttragende Metropole, die von KI und Blockchain-Technologie angetrieben wird." }
-        };
-        document.getElementById("title").innerText = translations[lang].title;
-        document.getElementById("description").innerText = translations[lang].description;
-    }
-
-    function addComment() {
-        const commentInput = document.getElementById("commentInput");
-        const commentText = commentInput.value.trim();
-        if (commentText !== "") {
-            document.getElementById("commentsList").innerHTML += `<p>${commentText}</p>`;
-            commentInput.value = "";
-        }
-    }
-</script>
-
+<script src="scripts.js" defer></script>
 </body>
 </html>
