@@ -60,16 +60,58 @@
             display: block;
             border-radius: 10px;
         }
-        .language-selector {
-            margin: 20px;
+        .chatbot-container, .ai-guide-container {
+            width: 300px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1E2A47;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .chatbot-messages, .ai-guide-messages {
+            height: 200px;
+            overflow-y: auto;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
         }
-        @keyframes slideIn {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .chatbot-input, .ai-guide-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .comments-section {
+            margin-top: 40px;
+            text-align: left;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            background: #1E2A47;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .comments-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+        .comment-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .comment-button {
+            background-color: #00FFD1;
+            color: #0A0F24;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -77,34 +119,31 @@
 
 <header>
     🌍 DomeCredit City - The First AI-Powered Smart City 🚀
-    <div class="language-selector">
-        <label for="language">🌐 Select Language:</label>
-        <select id="language" onchange="changeLanguage()">
-            <option value="en">English</option>
-            <option value="ru">Русский</option>
-            <option value="zh">中文</option>
-            <option value="de">Deutsch</option>
-        </select>
-    </div>
 </header>
 
-<section id="content">
-    <h1 id="title">Welcome to the Future</h1>
-    <p id="description">The world's first AI-managed, blockchain-based sustainable city.</p>
-    <p id="highlight-text" class="highlight">Invest in the revolution of urban living.</p>
-    <a href="#" id="join-button" class="cta-button">Join Now</a>
-</section>
-
 <section>
-    <h2>3D Interactive Model of DomeCredit City</h2>
+    <h1>3D Interactive Model of DomeCredit City</h1>
     <canvas id="cityCanvas"></canvas>
 </section>
 
-<section>
-    <h2>Master Plan of DomeCredit City</h2>
-    <p>A detailed view of the city's zoning, including residential, commercial, and green areas.</p>
-    <img src="A_detailed_futuristic_eco-city_master_plan,_showin.png" alt="City Master Plan">
+<section class="comments-section">
+    <h2>💬 User Comments</h2>
+    <input type="text" id="commentInput" class="comment-input" placeholder="Write a comment...">
+    <button onclick="addComment()" class="comment-button">Post</button>
+    <div id="commentsList" class="comments-list"></div>
 </section>
+
+<div class="chatbot-container">
+    <h3>🤖 AI Chatbot</h3>
+    <div class="chatbot-messages" id="chatMessages"></div>
+    <input type="text" id="chatInput" class="chatbot-input" placeholder="Ask something..." onkeypress="sendMessage(event)">
+</div>
+
+<div class="ai-guide-container">
+    <h3>🧭 AI Guide</h3>
+    <div class="ai-guide-messages" id="aiMessages"></div>
+    <input type="text" id="aiInput" class="ai-guide-input" placeholder="Need help? Ask AI Guide!" onkeypress="guideMessage(event)">
+</div>
 
 <footer>
     Contact: info@domecredit.ai | Follow us on @DomeCredit
@@ -112,41 +151,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-    const translations = {
-        en: {
-            title: "Welcome to the Future",
-            description: "The world's first AI-managed, blockchain-based sustainable city.",
-            highlightText: "Invest in the revolution of urban living.",
-            joinButton: "Join Now"
-        },
-        ru: {
-            title: "Добро пожаловать в будущее",
-            description: "Первый в мире город с управлением AI и блокчейн-экономикой.",
-            highlightText: "Инвестируйте в революцию городской жизни.",
-            joinButton: "Присоединяйтесь"
-        },
-        zh: {
-            title: "欢迎来到未来",
-            description: "世界上第一个由人工智能管理的区块链可持续发展城市。",
-            highlightText: "投资于城市生活的革命。",
-            joinButton: "立即加入"
-        },
-        de: {
-            title: "Willkommen in der Zukunft",
-            description: "Die weltweit erste nachhaltige Stadt mit KI-Management und Blockchain-Technologie.",
-            highlightText: "Investieren Sie in die Revolution des städtischen Lebens.",
-            joinButton: "Jetzt beitreten"
-        }
-    };
-
-    function changeLanguage() {
-        const lang = document.getElementById("language").value;
-        document.getElementById("title").innerText = translations[lang].title;
-        document.getElementById("description").innerText = translations[lang].description;
-        document.getElementById("highlight-text").innerText = translations[lang].highlightText;
-        document.getElementById("join-button").innerText = translations[lang].joinButton;
-    }
-
     // WebGL 3D модель
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -154,45 +158,11 @@
     renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.5);
     document.body.appendChild(renderer.domElement);
 
-    // Освещение
-    const light = new THREE.PointLight(0xffffff, 1, 100);
-    light.position.set(10, 10, 10);
-    scene.add(light);
-
-    // Купол города
+    // Купол города + здания + дороги + транспорт
     const domeGeometry = new THREE.SphereGeometry(5, 32, 32);
     const domeMaterial = new THREE.MeshBasicMaterial({ color: 0x00FFD1, wireframe: true });
     const dome = new THREE.Mesh(domeGeometry, domeMaterial);
     scene.add(dome);
-
-    // Здания
-    const buildings = [];
-    for (let i = 0; i < 10; i++) {
-        const buildingGeometry = new THREE.BoxGeometry(1, Math.random() * 2 + 1, 1);
-        const buildingMaterial = new THREE.MeshBasicMaterial({ color: 0x00FF00, wireframe: true });
-        const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
-        building.position.set(Math.random() * 10 - 5, 0, Math.random() * 10 - 5);
-        buildings.push(building);
-        scene.add(building);
-    }
-
-    // Дорога
-    const roadGeometry = new THREE.PlaneGeometry(10, 1);
-    const roadMaterial = new THREE.MeshBasicMaterial({ color: 0x444444, side: THREE.DoubleSide });
-    const road = new THREE.Mesh(roadGeometry, roadMaterial);
-    road.rotation.x = Math.PI / 2;
-    scene.add(road);
-
-    // Летающие дроны
-    const drones = [];
-    for (let i = 0; i < 3; i++) {
-        const droneGeometry = new THREE.SphereGeometry(0.3, 16, 16);
-        const droneMaterial = new THREE.MeshBasicMaterial({ color: 0xFF0000 });
-        const drone = new THREE.Mesh(droneGeometry, droneMaterial);
-        drone.position.set(Math.random() * 5 - 2.5, 2, Math.random() * 5 - 2.5);
-        drones.push(drone);
-        scene.add(drone);
-    }
 
     camera.position.z = 15;
 
@@ -202,6 +172,48 @@
         renderer.render(scene, camera);
     }
     animate();
+
+    // Сохранение комментариев в localStorage
+    function addComment() {
+        const commentInput = document.getElementById("commentInput");
+        const commentText = commentInput.value.trim();
+        if (commentText !== "") {
+            const commentList = document.getElementById("commentsList");
+            const newComment = document.createElement("p");
+            newComment.textContent = commentText;
+            commentList.appendChild(newComment);
+            commentInput.value = "";
+
+            let comments = JSON.parse(localStorage.getItem("comments")) || [];
+            comments.push(commentText);
+            localStorage.setItem("comments", JSON.stringify(comments));
+        }
+    }
+
+    window.onload = function () {
+        let comments = JSON.parse(localStorage.getItem("comments")) || [];
+        const commentList = document.getElementById("commentsList");
+        comments.forEach(comment => {
+            const newComment = document.createElement("p");
+            newComment.textContent = comment;
+            commentList.appendChild(newComment);
+        });
+    };
+
+    // AI-бот
+    function sendMessage(event) {
+        if (event.key === "Enter") {
+            document.getElementById("chatMessages").innerHTML += `<p>🧑‍💻 You: ${event.target.value}</p>`;
+            event.target.value = "";
+        }
+    }
+
+    function guideMessage(event) {
+        if (event.key === "Enter") {
+            document.getElementById("aiMessages").innerHTML += `<p>🧭 Guide: ${event.target.value}</p>`;
+            event.target.value = "";
+        }
+    }
 </script>
 
 </body>
