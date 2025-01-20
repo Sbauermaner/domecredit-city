@@ -48,16 +48,20 @@
             padding: 20px;
             font-size: 14px;
         }
-        canvas {
-            display: block;
-            margin: auto;
-        }
         img {
             width: 80%;
             max-width: 1200px;
             margin: 20px auto;
             display: block;
             border-radius: 10px;
+        }
+        .language-selector {
+            margin: 20px;
+        }
+        canvas {
+            display: block;
+            margin: auto;
+            background: black;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -73,45 +77,81 @@
 
 <header>
     🌍 DomeCredit City - The First AI-Powered Smart City 🚀
+    <div class="language-selector">
+        <label for="language">🌐 Select Language:</label>
+        <select id="language" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+            <option value="zh">中文</option>
+            <option value="de">Deutsch</option>
+        </select>
+    </div>
 </header>
 
-<section>
-    <h1>Welcome to the Future</h1>
-    <p>The world's first AI-managed, blockchain-based sustainable city.</p>
-    <p class="highlight">Invest in the revolution of urban living.</p>
-    <a href="#" class="cta-button">Join Now</a>
+<section id="content">
+    <h1 data-en="Welcome to the Future" data-ru="Добро пожаловать в будущее" data-zh="欢迎来到未来" data-de="Willkommen in der Zukunft">Welcome to the Future</h1>
+    <p data-en="The world's first AI-managed, blockchain-based sustainable city." 
+       data-ru="Первый в мире город с управлением AI и блокчейн-экономикой." 
+       data-zh="世界上第一个由人工智能管理的区块链可持续发展城市。" 
+       data-de="Die weltweit erste nachhaltige Stadt mit KI-Management und Blockchain-Technologie.">
+       The world's first AI-managed, blockchain-based sustainable city.</p>
+    <p class="highlight" data-en="Invest in the revolution of urban living."
+       data-ru="Инвестируйте в революцию городской жизни."
+       data-zh="投资于城市生活的革命。"
+       data-de="Investieren Sie in die Revolution des städtischen Lebens.">
+       Invest in the revolution of urban living.</p>
+    <a href="#" class="cta-button" data-en="Join Now" data-ru="Присоединяйтесь" data-zh="立即加入" data-de="Jetzt beitreten">Join Now</a>
 </section>
 
 <section>
-    <h2>About DomeCredit City</h2>
-    <p>DomeCredit City is an advanced eco-friendly urban project integrating AI-powered infrastructure, renewable energy sources, and blockchain-driven economy.</p>
-    <p>🔹 **Smart AI Systems** for city management.</p>
-    <p>🔹 **100% Renewable Energy** - solar, wind, and hydro.</p>
-    <p>🔹 **Secure Blockchain Transactions** with DMC token.</p>
-    <p>🔹 **Autonomous Vehicles** & green transportation.</p>
+    <h2 data-en="3D Interactive Model of DomeCredit City" data-ru="Интерактивная 3D-модель DomeCredit City" data-zh="DomeCredit City 交互式 3D 模型" data-de="Interaktives 3D-Modell von DomeCredit City">3D Interactive Model of DomeCredit City</h2>
+    <canvas id="cityCanvas"></canvas>
 </section>
 
 <section>
-    <h2>3D Renderings of DomeCredit City</h2>
-    <p>Explore multiple perspectives of the futuristic smart city.</p>
-    <img src="A_highly_detailed_3D-rendered_futuristic_eco-city_.png" alt="3D Model 1">
-    <img src="A_futuristic_eco-friendly_smart_city_with_multiple.png" alt="3D Model 2">
-</section>
-
-<section>
-    <h2>Master Plan of DomeCredit City</h2>
-    <p>A detailed view of the city's zoning, including residential, commercial, and green areas.</p>
+    <h2 data-en="Master Plan of DomeCredit City" data-ru="Генеральный план DomeCredit City" data-zh="DomeCredit City总体规划" data-de="Masterplan von DomeCredit City">Master Plan of DomeCredit City</h2>
+    <p data-en="A detailed view of the city's zoning, including residential, commercial, and green areas."
+       data-ru="Подробное описание зон города: жилая, коммерческая и зелёные зоны."
+       data-zh="城市分区的详细视图，包括住宅区、商业区和绿色区域。"
+       data-de="Eine detaillierte Ansicht der Stadtzonen, einschließlich Wohn-, Gewerbe- und Grünflächen.">
+       A detailed view of the city's zoning, including residential, commercial, and green areas.</p>
     <img src="A_detailed_futuristic_eco-city_master_plan,_showin.png" alt="City Master Plan">
-</section>
-
-<section>
-    <h2>Investment Opportunities</h2>
-    <p>Join leading investors in funding the most ambitious smart city project.</p>
 </section>
 
 <footer>
     Contact: info@domecredit.ai | Follow us on @DomeCredit
 </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+    function changeLanguage() {
+        var lang = document.getElementById("language").value;
+        document.querySelectorAll("[data-en]").forEach(el => {
+            el.innerText = el.getAttribute("data-" + lang);
+        });
+    }
+
+    // WebGL 3D модель
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('cityCanvas'), alpha: true });
+    renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.5);
+    document.body.appendChild(renderer.domElement);
+
+    const geometry = new THREE.SphereGeometry(5, 32, 32);
+    const material = new THREE.MeshBasicMaterial({ color: 0x00FFD1, wireframe: true });
+    const cityModel = new THREE.Mesh(geometry, material);
+    scene.add(cityModel);
+
+    camera.position.z = 15;
+
+    function animate() {
+        requestAnimationFrame(animate);
+        cityModel.rotation.y += 0.01;
+        renderer.render(scene, camera);
+    }
+    animate();
+</script>
 
 </body>
 </html>
