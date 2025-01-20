@@ -106,6 +106,38 @@
 <section id="content">
     <h1 id="title">Welcome to the Future</h1>
     <p id="description">An AI-powered, blockchain-based sustainable city with eco-friendly architecture.</p>
+    <div class="card">
+        <img src="A_detailed_futuristic_eco-city_master_plan,_showin.png" alt="City Master Plan" style="width:100%; border-radius:10px;">
+    </div>
+</section>
+
+<section>
+    <h2>🏗️ Architecture & District Development</h2>
+    <div class="card">
+        <p>The city is divided into multiple districts, each with a unique focus:</p>
+        <ul>
+            <li><b>Residential Districts</b> – Smart eco-friendly housing.</li>
+            <li><b>Business Hubs</b> – AI-powered commercial spaces.</li>
+            <li><b>Innovation & Tech Zones</b> – AI research and sustainable technologies.</li>
+            <li><b>Green Spaces</b> – Urban forests, solar-powered parks.</li>
+        </ul>
+        <img src="A_highly_detailed_futuristic_eco-city_layout,_feat.png" alt="Architectural Design" style="width:100%; border-radius:10px;">
+    </div>
+</section>
+
+<section>
+    <h2>💰 Financial System & DomeCredit (DMC)</h2>
+    <p>The city operates with a blockchain-based cryptocurrency, **DomeCredit (DMC)**.</p>
+    <ul>
+        <li><b>Fixed Prices on Goods</b> – Prevents inflation.</li>
+        <li><b>Smart Wallets</b> – Connected to biometric authentication.</li>
+        <li><b>Investment Pools</b> – Funds allocated to city development.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>🚀 3D Interactive Model of DomeCredit City</h2>
+    <canvas id="cityCanvas"></canvas>
 </section>
 
 <section class="comments-section">
@@ -120,27 +152,14 @@
 </footer>
 
 <script>
-    const translations = {
-        en: {
-            title: "Welcome to the Future",
-            description: "An AI-powered, blockchain-based sustainable city with eco-friendly architecture.",
-        },
-        ru: {
-            title: "Добро пожаловать в будущее",
-            description: "Город, управляемый искусственным интеллектом и основанный на блокчейне, с экологичной архитектурой.",
-        },
-        zh: {
-            title: "欢迎来到未来",
-            description: "由人工智能管理的区块链可持续城市，拥有环保建筑。",
-        },
-        de: {
-            title: "Willkommen in der Zukunft",
-            description: "Eine von künstlicher Intelligenz verwaltete, blockchain-basierte nachhaltige Stadt mit umweltfreundlicher Architektur.",
-        }
-    };
-
     function changeLanguage() {
         const lang = document.getElementById("language").value;
+        const translations = {
+            en: { title: "Welcome to the Future", description: "An AI-powered, blockchain-based sustainable city." },
+            ru: { title: "Добро пожаловать в будущее", description: "Город на основе ИИ и блокчейна." },
+            zh: { title: "欢迎来到未来", description: "基于人工智能和区块链的可持续城市。" },
+            de: { title: "Willkommen in der Zukunft", description: "Eine nachhaltige Stadt mit KI und Blockchain." }
+        };
         document.getElementById("title").innerText = translations[lang].title;
         document.getElementById("description").innerText = translations[lang].description;
     }
