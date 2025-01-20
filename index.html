@@ -48,6 +48,11 @@
             padding: 20px;
             font-size: 14px;
         }
+        canvas {
+            display: block;
+            margin: auto;
+            background: black;
+        }
         img {
             width: 80%;
             max-width: 1200px;
@@ -57,11 +62,6 @@
         }
         .language-selector {
             margin: 20px;
-        }
-        canvas {
-            display: block;
-            margin: auto;
-            background: black;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -89,32 +89,20 @@
 </header>
 
 <section id="content">
-    <h1 data-en="Welcome to the Future" data-ru="Добро пожаловать в будущее" data-zh="欢迎来到未来" data-de="Willkommen in der Zukunft">Welcome to the Future</h1>
-    <p data-en="The world's first AI-managed, blockchain-based sustainable city." 
-       data-ru="Первый в мире город с управлением AI и блокчейн-экономикой." 
-       data-zh="世界上第一个由人工智能管理的区块链可持续发展城市。" 
-       data-de="Die weltweit erste nachhaltige Stadt mit KI-Management und Blockchain-Technologie.">
-       The world's first AI-managed, blockchain-based sustainable city.</p>
-    <p class="highlight" data-en="Invest in the revolution of urban living."
-       data-ru="Инвестируйте в революцию городской жизни."
-       data-zh="投资于城市生活的革命。"
-       data-de="Investieren Sie in die Revolution des städtischen Lebens.">
-       Invest in the revolution of urban living.</p>
-    <a href="#" class="cta-button" data-en="Join Now" data-ru="Присоединяйтесь" data-zh="立即加入" data-de="Jetzt beitreten">Join Now</a>
+    <h1 id="title">Welcome to the Future</h1>
+    <p id="description">The world's first AI-managed, blockchain-based sustainable city.</p>
+    <p id="highlight-text" class="highlight">Invest in the revolution of urban living.</p>
+    <a href="#" id="join-button" class="cta-button">Join Now</a>
 </section>
 
 <section>
-    <h2 data-en="3D Interactive Model of DomeCredit City" data-ru="Интерактивная 3D-модель DomeCredit City" data-zh="DomeCredit City 交互式 3D 模型" data-de="Interaktives 3D-Modell von DomeCredit City">3D Interactive Model of DomeCredit City</h2>
+    <h2>3D Interactive Model of DomeCredit City</h2>
     <canvas id="cityCanvas"></canvas>
 </section>
 
 <section>
-    <h2 data-en="Master Plan of DomeCredit City" data-ru="Генеральный план DomeCredit City" data-zh="DomeCredit City总体规划" data-de="Masterplan von DomeCredit City">Master Plan of DomeCredit City</h2>
-    <p data-en="A detailed view of the city's zoning, including residential, commercial, and green areas."
-       data-ru="Подробное описание зон города: жилая, коммерческая и зелёные зоны."
-       data-zh="城市分区的详细视图，包括住宅区、商业区和绿色区域。"
-       data-de="Eine detaillierte Ansicht der Stadtzonen, einschließlich Wohn-, Gewerbe- und Grünflächen.">
-       A detailed view of the city's zoning, including residential, commercial, and green areas.</p>
+    <h2>Master Plan of DomeCredit City</h2>
+    <p>A detailed view of the city's zoning, including residential, commercial, and green areas.</p>
     <img src="A_detailed_futuristic_eco-city_master_plan,_showin.png" alt="City Master Plan">
 </section>
 
@@ -124,11 +112,39 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+    const translations = {
+        en: {
+            title: "Welcome to the Future",
+            description: "The world's first AI-managed, blockchain-based sustainable city.",
+            highlightText: "Invest in the revolution of urban living.",
+            joinButton: "Join Now"
+        },
+        ru: {
+            title: "Добро пожаловать в будущее",
+            description: "Первый в мире город с управлением AI и блокчейн-экономикой.",
+            highlightText: "Инвестируйте в революцию городской жизни.",
+            joinButton: "Присоединяйтесь"
+        },
+        zh: {
+            title: "欢迎来到未来",
+            description: "世界上第一个由人工智能管理的区块链可持续发展城市。",
+            highlightText: "投资于城市生活的革命。",
+            joinButton: "立即加入"
+        },
+        de: {
+            title: "Willkommen in der Zukunft",
+            description: "Die weltweit erste nachhaltige Stadt mit KI-Management und Blockchain-Technologie.",
+            highlightText: "Investieren Sie in die Revolution des städtischen Lebens.",
+            joinButton: "Jetzt beitreten"
+        }
+    };
+
     function changeLanguage() {
-        var lang = document.getElementById("language").value;
-        document.querySelectorAll("[data-en]").forEach(el => {
-            el.innerText = el.getAttribute("data-" + lang);
-        });
+        const lang = document.getElementById("language").value;
+        document.getElementById("title").innerText = translations[lang].title;
+        document.getElementById("description").innerText = translations[lang].description;
+        document.getElementById("highlight-text").innerText = translations[lang].highlightText;
+        document.getElementById("join-button").innerText = translations[lang].joinButton;
     }
 
     // WebGL 3D модель
@@ -138,16 +154,51 @@
     renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.5);
     document.body.appendChild(renderer.domElement);
 
-    const geometry = new THREE.SphereGeometry(5, 32, 32);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00FFD1, wireframe: true });
-    const cityModel = new THREE.Mesh(geometry, material);
-    scene.add(cityModel);
+    // Освещение
+    const light = new THREE.PointLight(0xffffff, 1, 100);
+    light.position.set(10, 10, 10);
+    scene.add(light);
+
+    // Купол города
+    const domeGeometry = new THREE.SphereGeometry(5, 32, 32);
+    const domeMaterial = new THREE.MeshBasicMaterial({ color: 0x00FFD1, wireframe: true });
+    const dome = new THREE.Mesh(domeGeometry, domeMaterial);
+    scene.add(dome);
+
+    // Здания
+    const buildings = [];
+    for (let i = 0; i < 10; i++) {
+        const buildingGeometry = new THREE.BoxGeometry(1, Math.random() * 2 + 1, 1);
+        const buildingMaterial = new THREE.MeshBasicMaterial({ color: 0x00FF00, wireframe: true });
+        const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
+        building.position.set(Math.random() * 10 - 5, 0, Math.random() * 10 - 5);
+        buildings.push(building);
+        scene.add(building);
+    }
+
+    // Дорога
+    const roadGeometry = new THREE.PlaneGeometry(10, 1);
+    const roadMaterial = new THREE.MeshBasicMaterial({ color: 0x444444, side: THREE.DoubleSide });
+    const road = new THREE.Mesh(roadGeometry, roadMaterial);
+    road.rotation.x = Math.PI / 2;
+    scene.add(road);
+
+    // Летающие дроны
+    const drones = [];
+    for (let i = 0; i < 3; i++) {
+        const droneGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+        const droneMaterial = new THREE.MeshBasicMaterial({ color: 0xFF0000 });
+        const drone = new THREE.Mesh(droneGeometry, droneMaterial);
+        drone.position.set(Math.random() * 5 - 2.5, 2, Math.random() * 5 - 2.5);
+        drones.push(drone);
+        scene.add(drone);
+    }
 
     camera.position.z = 15;
 
     function animate() {
         requestAnimationFrame(animate);
-        cityModel.rotation.y += 0.01;
+        dome.rotation.y += 0.005;
         renderer.render(scene, camera);
     }
     animate();
