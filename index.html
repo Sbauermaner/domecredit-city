@@ -52,6 +52,13 @@
             display: block;
             margin: auto;
         }
+        img {
+            width: 80%;
+            max-width: 1200px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -76,14 +83,10 @@
 </section>
 
 <section>
-    <h2>Our Vision</h2>
-    <p>Combining AI, blockchain, and renewable energy to create a self-sufficient, intelligent city.</p>
-</section>
-
-<section>
-    <h2>3D Model of the City</h2>
-    <p>Explore the interactive 3D visualization of DomeCredit City below:</p>
-    <canvas id="cityCanvas"></canvas>
+    <h2>3D Renderings of DomeCredit City</h2>
+    <p>Explore multiple perspectives of the futuristic smart city.</p>
+    <img src="A_highly_detailed_3D-rendered_futuristic_eco-city.png" alt="3D Model 1">
+    <img src="A_futuristic_eco-friendly_smart_city_with_multiple.png" alt="3D Model 2">
 </section>
 
 <section>
@@ -94,30 +97,6 @@
 <footer>
     Contact: info@domecredit.ai | Follow us on @DomeCredit
 </footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-    // Создание сцены с 3D-графикой
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('cityCanvas'), alpha: true });
-    renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.5);
-    document.body.appendChild(renderer.domElement);
-
-    const geometry = new THREE.SphereGeometry(5, 32, 32);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00FFD1, wireframe: true });
-    const cityModel = new THREE.Mesh(geometry, material);
-    scene.add(cityModel);
-
-    camera.position.z = 15;
-
-    function animate() {
-        requestAnimationFrame(animate);
-        cityModel.rotation.y += 0.01;
-        renderer.render(scene, camera);
-    }
-    animate();
-</script>
 
 </body>
 </html>
