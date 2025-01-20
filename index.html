@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,58 +32,14 @@
             text-align: center;
             animation: slideIn 1.5s ease-in-out;
         }
-        .highlight {
-            font-size: 22px;
-            font-weight: bold;
-            color: #00FFD1;
-        }
-        .cta-button {
-            background-color: #00FFD1;
-            color: #0A0F24;
-            padding: 15px 30px;
-            font-size: 18px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: scale(1.1);
-        }
-        .comments-section {
-            margin-top: 40px;
-            text-align: left;
-            width: 60%;
-            margin-left: auto;
-            margin-right: auto;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-        }
         .language-selector {
             margin: 20px;
         }
-        .comment-input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-        }
-        .comment-button {
-            background-color: #00FFD1;
-            color: #0A0F24;
-            padding: 10px;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        footer {
-            background: #1E2A47;
+        .comment-section {
+            background: rgba(255, 255, 255, 0.1);
             padding: 20px;
-            font-size: 14px;
-            margin-top: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -105,33 +60,39 @@
 
 <section id="content">
     <h1 id="title">Welcome to the Future</h1>
-    <p id="description">An AI-powered, blockchain-based sustainable city with eco-friendly architecture.</p>
-    <div class="card">
-        <img src="A_detailed_futuristic_eco-city_master_plan,_showin.png" alt="City Master Plan" style="width:100%; border-radius:10px;">
-    </div>
+    <p id="description">DomeCredit City is a revolutionary self-sustaining metropolis powered by AI and blockchain technology. Designed for sustainability, it integrates green energy, smart governance, and a transparent economic system using DomeCredit (DMC). The city's infrastructure is optimized for efficiency, security, and quality of life.</p>
 </section>
 
 <section>
-    <h2>🏗️ Architecture & District Development</h2>
-    <div class="card">
-        <p>The city is divided into multiple districts, each with a unique focus:</p>
-        <ul>
-            <li><b>Residential Districts</b> – Smart eco-friendly housing.</li>
-            <li><b>Business Hubs</b> – AI-powered commercial spaces.</li>
-            <li><b>Innovation & Tech Zones</b> – AI research and sustainable technologies.</li>
-            <li><b>Green Spaces</b> – Urban forests, solar-powered parks.</li>
-        </ul>
-        <img src="A_highly_detailed_futuristic_eco-city_layout,_feat.png" alt="Architectural Design" style="width:100%; border-radius:10px;">
-    </div>
+    <h2>🏗️ City Districts & Infrastructure</h2>
+    <p>DomeCredit City is structured into multiple districts, each designed with a specific purpose:</p>
+    <ul>
+        <li><b>Residential Districts</b> – Smart eco-friendly housing.</li>
+        <li><b>Business Hubs</b> – AI-powered commercial spaces.</li>
+        <li><b>Tech Innovation Zones</b> – AI research and sustainable technologies.</li>
+        <li><b>Green Energy Sectors</b> – Solar, wind, and water power plants.</li>
+        <li><b>Transport & Logistics</b> – AI-driven traffic control and smart roads.</li>
+    </ul>
 </section>
 
 <section>
     <h2>💰 Financial System & DomeCredit (DMC)</h2>
-    <p>The city operates with a blockchain-based cryptocurrency, **DomeCredit (DMC)**.</p>
+    <p>The city operates with a blockchain-based cryptocurrency, DomeCredit (DMC), ensuring a stable and fair economy.</p>
     <ul>
-        <li><b>Fixed Prices on Goods</b> – Prevents inflation.</li>
-        <li><b>Smart Wallets</b> – Connected to biometric authentication.</li>
+        <li><b>Smart Wallets</b> – Linked to biometric authentication.</li>
+        <li><b>Transparent Transactions</b> – Blockchain ensures no corruption.</li>
         <li><b>Investment Pools</b> – Funds allocated to city development.</li>
+        <li><b>Sector-Based Pricing</b> – Stabilized economy with fixed essential costs.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>🌱 Environmental Sustainability & Radiation Protection</h2>
+    <p>DomeCredit City integrates advanced technologies for ecological balance.</p>
+    <ul>
+        <li><b>Solar & Wind Energy</b> – Self-sustaining power sources.</li>
+        <li><b>Water Purification</b> – Smart filtration systems.</li>
+        <li><b>Radiation Shielding</b> – Dome structure with protective materials.</li>
     </ul>
 </section>
 
@@ -140,10 +101,10 @@
     <canvas id="cityCanvas"></canvas>
 </section>
 
-<section class="comments-section">
+<section class="comment-section">
     <h2>💬 User Comments</h2>
     <input type="text" id="commentInput" placeholder="Write a comment...">
-    <button onclick="addComment()" class="comment-button">Post</button>
+    <button onclick="addComment()">Post</button>
     <div id="commentsList"></div>
 </section>
 
@@ -155,10 +116,10 @@
     function changeLanguage() {
         const lang = document.getElementById("language").value;
         const translations = {
-            en: { title: "Welcome to the Future", description: "An AI-powered, blockchain-based sustainable city." },
-            ru: { title: "Добро пожаловать в будущее", description: "Город на основе ИИ и блокчейна." },
-            zh: { title: "欢迎来到未来", description: "基于人工智能和区块链的可持续城市。" },
-            de: { title: "Willkommen in der Zukunft", description: "Eine nachhaltige Stadt mit KI und Blockchain." }
+            en: { title: "Welcome to the Future", description: "DomeCredit City is a revolutionary self-sustaining metropolis powered by AI and blockchain technology." },
+            ru: { title: "Добро пожаловать в будущее", description: "DomeCredit City - революционный самодостаточный мегаполис на основе ИИ и блокчейна." },
+            zh: { title: "欢迎来到未来", description: "DomeCredit City 是一个由人工智能和区块链技术驱动的革命性自给自足大都市。" },
+            de: { title: "Willkommen in der Zukunft", description: "DomeCredit City ist eine revolutionäre, selbsttragende Metropole, die von KI und Blockchain-Technologie angetrieben wird." }
         };
         document.getElementById("title").innerText = translations[lang].title;
         document.getElementById("description").innerText = translations[lang].description;
