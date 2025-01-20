@@ -10,41 +10,76 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #0A0F24;
             color: white;
             text-align: center;
             margin: 0;
             padding: 0;
+            transition: all 0.3s ease-in-out;
         }
         header {
             background: linear-gradient(90deg, #1E2A47, #3B4A6B);
             padding: 20px;
-            font-size: 24px;
+            font-size: 26px;
+            font-weight: bold;
+            text-transform: uppercase;
             animation: fadeIn 2s ease-in-out;
         }
         section {
             padding: 40px;
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
             animation: slideIn 1.5s ease-in-out;
         }
-        img {
-            width: 80%;
-            max-width: 1200px;
-            margin: 20px auto;
-            display: block;
-            border-radius: 10px;
+        .highlight {
+            font-size: 22px;
+            font-weight: bold;
+            color: #00FFD1;
         }
-        .comments-section, .chatbot-container, .ai-guide-container {
+        .cta-button {
+            background-color: #00FFD1;
+            color: #0A0F24;
+            padding: 15px 30px;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: scale(1.1);
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 255, 209, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        footer {
+            background: #1E2A47;
+            padding: 20px;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+        .comments-section {
             margin-top: 40px;
             text-align: left;
             width: 60%;
             margin-left: auto;
             margin-right: auto;
-            background: #1E2A47;
+            background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
         }
-        .comment-input, .chatbot-input, .ai-guide-input {
+        .comment-input {
             width: calc(100% - 20px);
             padding: 10px;
             border: none;
@@ -59,6 +94,14 @@
             cursor: pointer;
             border-radius: 5px;
         }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -69,52 +112,23 @@
 
 <section>
     <h1>🌆 About DomeCredit City</h1>
-    <p>DomeCredit City is an AI-powered, blockchain-based sustainable city with eco-friendly architecture and smart infrastructure.
-       It is designed to optimize energy efficiency, economic stability, and community well-being.</p>
-    <img src="A_detailed_futuristic_eco-city_master_plan,_showin.png" alt="City Master Plan">
+    <p class="highlight">An AI-powered, blockchain-based sustainable city with eco-friendly architecture.</p>
+    <div class="card">
+        <img src="A_detailed_futuristic_eco-city_master_plan,_showin.png" alt="City Master Plan" style="width:100%; border-radius:10px;">
+    </div>
 </section>
 
 <section>
     <h2>🏗️ Architecture & District Development</h2>
-    <p>The city is divided into multiple districts, each with a unique focus:</p>
-    <ul>
-        <li><b>Residential Districts</b> – eco-friendly housing with smart home integration.</li>
-        <li><b>Business Hubs</b> – AI-powered commercial centers and office spaces.</li>
-        <li><b>Innovation & Tech Zones</b> – research centers for AI, biotech, and sustainability.</li>
-        <li><b>Green Spaces</b> – urban forests, parks, and solar-powered energy zones.</li>
-    </ul>
-    <img src="A_highly_detailed_futuristic_eco-city_layout,_feat.png" alt="Architectural Designs and Road Networks">
-</section>
-
-<section>
-    <h2>💰 Financial System & Payment Model</h2>
-    <p>The city operates with a blockchain-based cryptocurrency, **DomeCredit (DMC)**, ensuring transparency and eliminating corruption.</p>
-    <ul>
-        <li><b>Sector-Based Pricing</b> – Fixed pricing on essential goods to prevent inflation.</li>
-        <li><b>Automatic Upgrades</b> – Residents earning DMC get automatic housing upgrades.</li>
-        <li><b>Investment Pools</b> – Collected funds are directed toward infrastructure expansion.</li>
-    </ul>
-    <img src="A_futuristic_eco-friendly_smart_city_with_multiple.png" alt="Financial Structure">
-</section>
-
-<section>
-    <h2>🌱 Incentives & Social Benefits</h2>
-    <p>Residents receive benefits based on contribution to the city's ecosystem.</p>
-    <ul>
-        <li><b>Workforce Protection</b> – Special packages for injured workers and disabled individuals.</li>
-        <li><b>Housing Development</b> – Discounts for young families and large households.</li>
-        <li><b>Eco-Engagement Rewards</b> – Bonuses for sustainable practices and energy conservation.</li>
-    </ul>
-</section>
-
-<section>
-    <h2>🌍 Investment & Expansion Strategy</h2>
-    <p>The city is funded through multiple investment channels:</p>
-    <ul>
-        <li>**Global Investors & Smart Funds** – Encouraging private and corporate investments.</li>
-        <li>**Sectoral Development Plans** – Funding allocated based on district expansion.</li>
-        <li>**Real Estate Tokenization** – Digital assets representing property ownership.</li>
-    </ul>
+    <div class="card">
+        <p>The city is divided into multiple districts, each with a unique focus:</p>
+        <ul>
+            <li><b>Residential Districts</b> – Smart eco-friendly housing.</li>
+            <li><b>Business Hubs</b> – AI-powered commercial spaces.</li>
+            <li><b>Green Spaces</b> – Urban forests, solar-powered zones.</li>
+        </ul>
+        <img src="A_highly_detailed_futuristic_eco-city_layout,_feat.png" alt="Architectural Design" style="width:100%; border-radius:10px;">
+    </div>
 </section>
 
 <section>
@@ -125,15 +139,9 @@
 <section class="comments-section">
     <h2>💬 User Comments</h2>
     <input type="text" id="commentInput" placeholder="Write a comment...">
-    <button onclick="addComment()">Post</button>
+    <button onclick="addComment()" class="comment-button">Post</button>
     <div id="commentsList"></div>
 </section>
-
-<div class="chatbot-container">
-    <h3>🤖 AI Chatbot</h3>
-    <div class="chatbot-messages" id="chatMessages"></div>
-    <input type="text" id="chatInput" placeholder="Ask something..." onkeypress="sendMessage(event)">
-</div>
 
 <footer>
     Contact: info@domecredit.ai | Follow us on @DomeCredit
@@ -146,13 +154,6 @@
         if (commentText !== "") {
             document.getElementById("commentsList").innerHTML += `<p>${commentText}</p>`;
             commentInput.value = "";
-        }
-    }
-
-    function sendMessage(event) {
-        if (event.key === "Enter") {
-            document.getElementById("chatMessages").innerHTML += `<p>🧑‍💻 You: ${event.target.value}</p>`;
-            event.target.value = "";
         }
     }
 
