@@ -10,8 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #0A0F24;
+            font-family: 'Poppins', sans-serif;
+            background: #0A0F24;
             color: white;
             text-align: center;
             margin: 0;
@@ -21,7 +21,7 @@
         header {
             background: linear-gradient(90deg, #1E2A47, #3B4A6B);
             padding: 20px;
-            font-size: 26px;
+            font-size: 28px;
             font-weight: bold;
             text-transform: uppercase;
             animation: fadeIn 2s ease-in-out;
@@ -52,23 +52,6 @@
         .cta-button:hover {
             transform: scale(1.1);
         }
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 255, 209, 0.2);
-            transition: transform 0.3s ease-in-out;
-        }
-        .card:hover {
-            transform: scale(1.05);
-        }
-        footer {
-            background: #1E2A47;
-            padding: 20px;
-            font-size: 14px;
-            margin-top: 30px;
-        }
         .comments-section {
             margin-top: 40px;
             text-align: left;
@@ -78,6 +61,9 @@
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
+        }
+        .language-selector {
+            margin: 20px;
         }
         .comment-input {
             width: calc(100% - 20px);
@@ -94,13 +80,11 @@
             cursor: pointer;
             border-radius: 5px;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideIn {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        footer {
+            background: #1E2A47;
+            padding: 20px;
+            font-size: 14px;
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -108,32 +92,20 @@
 
 <header>
     🌍 DomeCredit City - The Future of Smart Living 🚀
+    <div class="language-selector">
+        <label for="language">🌐 Select Language:</label>
+        <select id="language" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+            <option value="zh">中文</option>
+            <option value="de">Deutsch</option>
+        </select>
+    </div>
 </header>
 
-<section>
-    <h1>🌆 About DomeCredit City</h1>
-    <p class="highlight">An AI-powered, blockchain-based sustainable city with eco-friendly architecture.</p>
-    <div class="card">
-        <img src="A_detailed_futuristic_eco-city_master_plan,_showin.png" alt="City Master Plan" style="width:100%; border-radius:10px;">
-    </div>
-</section>
-
-<section>
-    <h2>🏗️ Architecture & District Development</h2>
-    <div class="card">
-        <p>The city is divided into multiple districts, each with a unique focus:</p>
-        <ul>
-            <li><b>Residential Districts</b> – Smart eco-friendly housing.</li>
-            <li><b>Business Hubs</b> – AI-powered commercial spaces.</li>
-            <li><b>Green Spaces</b> – Urban forests, solar-powered zones.</li>
-        </ul>
-        <img src="A_highly_detailed_futuristic_eco-city_layout,_feat.png" alt="Architectural Design" style="width:100%; border-radius:10px;">
-    </div>
-</section>
-
-<section>
-    <h2>🚀 3D Interactive Model of DomeCredit City</h2>
-    <canvas id="cityCanvas"></canvas>
+<section id="content">
+    <h1 id="title">Welcome to the Future</h1>
+    <p id="description">An AI-powered, blockchain-based sustainable city with eco-friendly architecture.</p>
 </section>
 
 <section class="comments-section">
@@ -148,6 +120,31 @@
 </footer>
 
 <script>
+    const translations = {
+        en: {
+            title: "Welcome to the Future",
+            description: "An AI-powered, blockchain-based sustainable city with eco-friendly architecture.",
+        },
+        ru: {
+            title: "Добро пожаловать в будущее",
+            description: "Город, управляемый искусственным интеллектом и основанный на блокчейне, с экологичной архитектурой.",
+        },
+        zh: {
+            title: "欢迎来到未来",
+            description: "由人工智能管理的区块链可持续城市，拥有环保建筑。",
+        },
+        de: {
+            title: "Willkommen in der Zukunft",
+            description: "Eine von künstlicher Intelligenz verwaltete, blockchain-basierte nachhaltige Stadt mit umweltfreundlicher Architektur.",
+        }
+    };
+
+    function changeLanguage() {
+        const lang = document.getElementById("language").value;
+        document.getElementById("title").innerText = translations[lang].title;
+        document.getElementById("description").innerText = translations[lang].description;
+    }
+
     function addComment() {
         const commentInput = document.getElementById("commentInput");
         const commentText = commentInput.value.trim();
@@ -156,27 +153,6 @@
             commentInput.value = "";
         }
     }
-
-    // WebGL 3D Model
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('cityCanvas'), alpha: true });
-    renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.5);
-    document.body.appendChild(renderer.domElement);
-
-    const domeGeometry = new THREE.SphereGeometry(5, 32, 32);
-    const domeMaterial = new THREE.MeshBasicMaterial({ color: 0x00FFD1, wireframe: true });
-    const dome = new THREE.Mesh(domeGeometry, domeMaterial);
-    scene.add(dome);
-
-    camera.position.z = 15;
-
-    function animate() {
-        requestAnimationFrame(animate);
-        dome.rotation.y += 0.005;
-        renderer.render(scene, camera);
-    }
-    animate();
 </script>
 
 </body>
